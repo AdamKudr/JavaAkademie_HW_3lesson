@@ -1,33 +1,24 @@
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+        GuestList guestList = new GuestList();
+
         Guest guest1 = new Guest("Adela", "Malikova", LocalDate.of(1993,03,13));
+        guestList.addGuest(guest1);
         Guest guest2 = new Guest("Jan", "Dvoracek", LocalDate.of(1995, 05, 05));
+        guestList.addGuest(guest2);
 
-        List<Guest> Guestlist = new ArrayList<>();
-        Guestlist.add(guest1);
-        Guestlist.add(guest2);
-
-        for (Guest guest : Guestlist) {  // cyklus "for-each"
-            System.out.println(guest.getFirstName() + " " + guest.getLastName() + " " + guest.getDateOfBirth());
-        }
+        RoomList roomList = new RoomList();
 
         Room room1 = new Room(1, 1, true, true, BigDecimal.valueOf(1000.00));
+        roomList.addRoom(room1);
         Room room2 = new Room(2, 1, true, true, BigDecimal.valueOf(1000.00));
+        roomList.addRoom(room2);
         Room room3 = new Room(3, 3, false, true, BigDecimal.valueOf(2400.00));
-
-        List<Room> Roomlist = new ArrayList<>();
-        Roomlist.add(room1);
-        Roomlist.add(room2);
-        Roomlist.add(room3);
-
-        for (Room room : Roomlist) {  // cyklus "for-each"
-            System.out.println("Room number: " + room.getRoomNumber() + ", Capacity: " + room.getRoomBeds() + ", Price: " + room.getRoomPrice() + ", Balcony: " + room.isRoomBalcony() + ", Sea view: " + room.isRoomSeaView());
-        }
+        roomList.addRoom(room3);
 
         BookingList bookingList = new BookingList();
 
@@ -39,7 +30,10 @@ public class Main {
         bookingList.addBooking(booking3);
         Booking booking4 = new Booking(guest2, room3, LocalDate.of(2021, 10, 1), LocalDate.of(2021, 10, 12), true);
         bookingList.addBooking(booking4);
-        
+
+
+        guestList.displayGuests();
+        roomList.displayRooms();
         bookingList.displayBookings();
 
 

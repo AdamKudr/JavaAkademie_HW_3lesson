@@ -12,7 +12,15 @@ public class GuestList {
             guestList.add(guest);
         }
 
-        public void displayGuests() {
+    public List<Guest> getGuestList() {
+        return guestList;
+    }
+
+    public void setGuestList(List<Guest> guestList) {
+        this.guestList = guestList;
+    }
+
+    public void displayGuests() {
             for (Guest guest : guestList) {
                 System.out.println(guest);
             }

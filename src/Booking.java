@@ -1,16 +1,20 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking {
 
     private Guest bookingGuest; //jméno hosta
-    private Guest otherGuests; //jména dalších hostů
+    private List<Guest> otherGuests; //jména dalších hostů
     private Room bookingRoom; //číslo pokoje
     private LocalDate startDate; //začátek rezervace
     private LocalDate endDate; //konec rezervace
     private boolean isBusiness; //pracovní = true
 
     //konstruktor 1
-    public Booking(Guest bookingGuest, Guest otherGuests, Room bookingRoom, LocalDate startDate, LocalDate endDate, boolean isBusiness){
+    public Booking(Guest bookingGuest, List<Guest> otherGuests, Room bookingRoom, LocalDate startDate, LocalDate endDate, boolean isBusiness){
         this.bookingGuest = bookingGuest;
         this.otherGuests = otherGuests;
         this.bookingRoom = bookingRoom;
@@ -24,10 +28,26 @@ public class Booking {
     //konstruktor 2
     public Booking(Guest bookingGuest, Room bookingRoom, LocalDate startDate, LocalDate endDate, boolean isBusiness) {
         this.bookingGuest = bookingGuest;
+        otherGuests = new ArrayList<>();
         this.bookingRoom = bookingRoom;
         this.startDate = startDate;
         this.endDate = endDate;
         this.isBusiness = isBusiness;
+    }
+
+    public static int getBookingLength(Booking booking) {
+        int numberOfNights = (int) ChronoUnit.DAYS.between(booking.startDate, booking.endDate);
+        return numberOfNights;
+    }
+
+    public static void printBookingLength(Booking booking) {
+        int numberOfNights = (int) ChronoUnit.DAYS.between(booking.startDate, booking.endDate);
+        System.out.println("Celkový počet nocí: " + numberOfNights);
+    }
+
+    public static void getPrice(Booking booking) {
+        BigDecimal totalPrice = BigDecimal.valueOf(getBookingLength(booking)).multiply(booking.getBookingRoom().getRoomPrice());
+        System.out.println("Celková cena za rezervaci: " + totalPrice);
     }
 
     public Guest getBookingGuest() {
@@ -38,11 +58,11 @@ public class Booking {
         this.bookingGuest = bookingGuest;
     }
 
-    public Guest getOtherGuests() {
+    public List<Guest> getOtherGuests() {
         return otherGuests;
     }
 
-    public void setOtherGuests(Guest otherGuests) {
+    public void setOtherGuests(List<Guest> otherGuests) {
         this.otherGuests = otherGuests;
     }
 

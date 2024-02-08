@@ -12,6 +12,14 @@ public class RoomList {
         roomList.add(room);
     }
 
+    public List<Room> getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(List<Room> roomList) {
+        this.roomList = roomList;
+    }
+
     public void displayRooms() {
         for (Room room : roomList) {
             System.out.println(room);
